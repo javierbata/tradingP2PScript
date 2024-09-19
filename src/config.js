@@ -16,7 +16,7 @@ export default {
   },
 
   
-  BACKENDNUBE:  "https://botluiscasanova.azurewebsites.net/",
+  BACKENDNUBE:  "https://tradingp2pbinancebackend-e0cfava9had6dmfs.eastus-01.azurewebsites.net/",
   BACKENDLOCAL: "http://localhost:5000"
 
 };

@@ -5,22 +5,15 @@ import { fileURLToPath } from 'url';
 import logger from '../logger.js';
 import fetch from 'node-fetch';
 import config from "../config.js";
+import process from "../process.js";
+
 // Importar routers
-import usersRouter from './usersRouter.js';
-import postsRouter from './postsRouter.js';
-import cryptoTypesRouter from './cryptoTypesRouter.js';
-import bankTypesRouter from './bankTypesRouter.js';
-import currencyTypesRouter from './currencyTypesRouter.js';
 
 const app = express();
 app.use(bodyParser.json());
 
 // Define rutas principales
-app.use("/users", usersRouter);
-app.use("/posts", postsRouter);
-app.use("/crypto-types", cryptoTypesRouter);
-app.use("/bank-types", bankTypesRouter);
-app.use("/currency-types", currencyTypesRouter);
+process.start()
 
 // Rutas de páginas de ejemplo
 app.get("/", (req, res) => {
