@@ -10,7 +10,6 @@ export default {
     password: 'Aaron.30',
     server: 'jaenviossql.database.windows.net',
     database: datebase,
-  
     options: {
       encrypt: true, // Si estás utilizando Azure, establece esto en true
     },
