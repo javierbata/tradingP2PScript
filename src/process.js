@@ -25,6 +25,7 @@ class Process {
         await dbController.storeDataInDB(await binanceController.fetchAndStoreData("USDT", "VES", "Provincial", "SELL"));
         // peru
       
+        
          await dbController.storeDataInDB(await binanceController.fetchAndStoreData("USDT", "PEN", "CreditBankofPeru", "BUY"));
          await dbController.storeDataInDB(await binanceController.fetchAndStoreData("USDT", "PEN", "CreditBankofPeru", "SELL"));
          await dbController.storeDataInDB(await binanceController.fetchAndStoreData("USDT", "USD", "CreditBankofPeru", "BUY"));
