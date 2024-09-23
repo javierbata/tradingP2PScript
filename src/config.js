@@ -16,7 +16,7 @@ export default {
   },
 
   
-  BACKENDNUBE:  "https://tradingp2pbinancebackend-e0cfava9had6dmfs.eastus-01.azurewebsites.net/",
+  BACKENDNUBE:  "https://tradingp2pscript.azurewebsites.net/",
   BACKENDLOCAL: "http://localhost:5000"
 
 };
