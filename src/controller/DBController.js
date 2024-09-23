@@ -25,7 +25,7 @@ class DBController {
 
       logger.info('Data stored in the database successfully.');
     } catch (error) {
-      logger.error('Error storing data in the database:', error.message);
+      logger.error('Error storing data in the database:' + error.message);
       throw error;
     }
   }
