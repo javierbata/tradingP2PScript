@@ -31,7 +31,7 @@ class APIService {
             return null;
           }
         } catch (error) {
-          logger.error('Error fetching crypto type:', error.response ? error.response.data : error.message);
+          logger.error('Error fetching crypto type:'+ error.response ? error.response.data : error.message);
           throw error;
         }
       }

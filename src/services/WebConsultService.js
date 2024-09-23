@@ -43,7 +43,7 @@ class WebConsultService {
       logger.info('P2P data fetched successfully from Binance.');
       return response.data;
     } catch (error) {
-      logger.error('Error requesting P2P data from Binance:', error);
+      logger.error('Error requesting P2P data from Binance:'+ error);
       throw error;
     }
   }

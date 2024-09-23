@@ -33,7 +33,9 @@ class Process {
 
         logger.info('Binance data fetched and stored successfully.');
       } catch (error) {
-        logger.error('Error during scheduled data fetch and store:', error.message);
+
+       // console.log(error.code)
+        logger.error(`Error during scheduled data fetch and store: code: ${error.code} message: ${error.message}`);
       }
     });
 
@@ -42,7 +44,7 @@ class Process {
     await dbController.storeDataInDB(initialData);
     logger.info('Initial Binance data fetched and stored successfully.');
   } catch (error) {
-    logger.error('Application error:', error.message);
+    logger.error(`Application error:' ${error.message}`);
   }
 }
 }

@@ -34,7 +34,7 @@ class BinanceController {
         return dataArray;
       }
     } catch (error) {
-      logger.error('Error fetching data from Binance:', error.message);
+      logger.error('Error fetching data from Binance:' + error.message);
       return [];
     }
   }
