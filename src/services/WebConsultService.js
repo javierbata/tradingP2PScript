@@ -6,7 +6,7 @@ import logger from '../logger.js';
 class WebConsultService {
   constructor() {
     // Inicializar el agente proxy si es necesario
-    this.proxyAgent = new HttpsProxyAgent('http://brd-customer-hl_126387b7-zone-datacenter_proxy1-country-ar:3c3kgjlir2q9@brd.superproxy.io:22225'); // Reemplaza con tu proxy real
+    this.proxyAgent = new HttpsProxyAgent('http://brd-customer-hl_126387b7-zone-datacenter_proxy1-country-co:3c3kgjlir2q9@brd.superproxy.io:22225'); // Reemplaza con tu proxy real
   }
 
 
