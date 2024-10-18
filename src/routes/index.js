@@ -71,7 +71,7 @@ app.get('/download-log-beta', (req, res) => {
   res.download(logFilePath, 'combined.log', (err) => {
     if (err) {
       logger.error('Error al descargar el archivo de log:', err);
-      res.status(500).send('Error al descargar el archivo de log');
+      res.status(500).send('Error al descar gar el archivo de log');
     } else {
       logger.info("Log file downloaded successfully");
     }
