@@ -64,6 +64,20 @@ app.get('/download-log', (req, res) => {
   });
 });
 
+app.get('/download-log-beta', (req, res) => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const logFilePath = path.join(__dirname, '../../logs', 'combined.log'); // Ruta al archivo de log
+  res.download(logFilePath, 'combined.log', (err) => {
+    if (err) {
+      logger.error('Error al descargar el archivo de log:', err);
+      res.status(500).send('Error al descargar el archivo de log');
+    } else {
+      logger.info("Log file downloaded successfully");
+    }
+  });
+});
+
 app.get('/delete-log', (req, res) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
