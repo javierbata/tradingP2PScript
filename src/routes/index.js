@@ -6,6 +6,7 @@ import logger from '../logger.js';
 import fetch from 'node-fetch';
 import config from "../config.js";
 import process from "../process.js";
+import fs from "fs";
 
 // Importar routers
 
