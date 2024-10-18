@@ -59,4 +59,4 @@ jobs:
           app-name: 'tradingP2PScript'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AC1AD607389D48D187A256A87F29FABA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_29FAA8796A9745F78635B59EBA853E16 }}
