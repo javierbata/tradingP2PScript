@@ -1,33 +1,32 @@
-// src/logger.js
 import { createLogger, format, transports } from 'winston';
-import path from 'path';
+import 'winston-daily-rotate-file';
 
-// Crear el logger
-const logger = createLogger({
-  level: 'info',
-  format: format.combine(
-    format.timestamp({
-      format: 'YYYY-MM-DD HH:mm:ss'
-    }),
-    format.errors({ stack: true }),
-    format.splat(),
-    format.json()
-  ),
-  defaultMeta: { service: 'tradingP2PBackend' },
-  transports: [
-    new transports.File({ filename: 'logs/error.log', level: 'error' }),
-    new transports.File({ filename: 'logs/combined.log' })
-  ]
+const { combine, timestamp, printf } = format;
+
+const logFormat = printf(({ level, message, timestamp }) => {
+  return `${timestamp} ${level}: ${message}`;
 });
 
-// Si no está en producción, también registrar en la consola
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(new transports.Console({
-    format: format.combine(
-      format.colorize(),
-      format.simple()
-    )
-  }));
-}
+// Configurar transporte para rotar archivos de log
+const dailyRotateFileTransport = new transports.DailyRotateFile({
+  filename: 'logs/combined-%DATE%.log',   // Nombre del archivo de log con formato de fecha
+  datePattern: 'YYYY-MM-DD-HH',           // Patrón de fecha para crear archivos de log
+  maxSize: '2',                        // Tamaño máximo por archivo (100 MB)
+  maxFiles: '14d',                        // Mantener logs por los últimos 14 días
+  zippedArchive: true                     // Comprimir archivos de log antiguos
+});
+
+const logger = createLogger({
+  level: 'info',
+  format: combine(
+    timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    logFormat
+  ),
+  transports: [
+    new transports.File({ filename: 'logs/error.log', level: 'error' }),  // Solo para errores
+    dailyRotateFileTransport,                                             // Rotación automática de logs
+    new transports.Console()                                              // Mostrar logs en la consola
+  ]
+});
 
 export default logger;

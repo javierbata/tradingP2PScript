@@ -30,13 +30,50 @@ app.get("/", (req, res) => {
 app.get('/download-log', (req, res) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const logFilePath = path.join(__dirname, '../logs', 'combined.log'); // Ruta al archivo de log
-  res.download(logFilePath, 'combined.log', (err) => {
+  const logDirectory = path.join(__dirname, '../../logs'); // Directorio donde están los logs
+
+  // Obtener el archivo de log más reciente
+  fs.readdir(logDirectory, (err, files) => {
     if (err) {
-      logger.error('Error al descargar el archivo de log:', err);
-      res.status(500).send('Error al descargar el archivo de log');
+      logger.error('Error al leer el directorio de logs:', err);
+      return res.status(500).send('Error al leer el directorio de logs');
+    }
+
+    // Filtrar solo archivos que siguen el patrón de log rotado
+    const logFiles = files.filter(file => file.startsWith('combined-') && file.endsWith('.log'));
+
+    if (logFiles.length === 0) {
+      return res.status(404).send('No se encontró ningún archivo de log');
+    }
+
+    // Ordenar archivos por fecha de creación (nombre) y obtener el más reciente
+    logFiles.sort();
+    const latestLogFile = logFiles[logFiles.length - 1]; // Último archivo
+
+    const logFilePath = path.join(logDirectory, latestLogFile);
+
+    // Descargar el archivo más reciente
+    res.download(logFilePath, latestLogFile, (err) => {
+      if (err) {
+        logger.error('Error al descargar el archivo de log:', err);
+        res.status(500).send('Error al descargar el archivo de log');
+      } else {
+        logger.info("Archivo de log descargado exitosamente.");
+      }
+    });
+  });
+});
+
+app.get('/delete-log', (req, res) => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const logFilePath = path.join(__dirname, '../../logs', 'combined.log'); // Ruta al archivo de log
+  fs.unlink(logFilePath, (err) => {
+    if (err) {
+      res.status(200).json({ message: 'Error al eliminar el archivo de log' });
     } else {
-      logger.info("Log file downloaded successfully");
+      logger.info("Archivo de log eliminado exitosamente.");
+      res.status(200).json({ message: 'Archivo de log eliminado exitosamente' });
     }
   });
 });
